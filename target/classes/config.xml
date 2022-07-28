@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xs">
+        
+    <context:component-scan base-package="org.example.dao"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <constructor-arg name="url" value="jdbc:postgresql://localhost:5432/task2_db"/>
+        <constructor-arg name="username" value="postgres"/>
+        <constructor-arg name="password" value="admin"/>
+    </bean>
+
+    <bean id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+<!--    <bean id="studentDao" class="org.example.dao.StudentDaoImpl">-->
+<!--        <property name="jdbcTemplate" ref="jdbcTemplateObject">-->
+<!--        </property>-->
+<!--    </bean>-->
+
+
+</beans>
