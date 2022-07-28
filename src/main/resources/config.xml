@@ -23,7 +23,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-<!--    <bean id="studentDao" class="org.example.dao.StudentDaoImpl">-->
+<!--    <bean id="studentDao" class="org.example.dao.daoImpl.StudentDaoImpl">-->
 <!--        <property name="jdbcTemplate" ref="jdbcTemplateObject">-->
 <!--        </property>-->
 <!--    </bean>-->

@@ -1,6 +1,7 @@
-package org.example.dao;
+package org.example.dao.daoImpl;
 
 import org.example.Student;
+import org.example.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,9 +45,9 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public int updateStudent(Student student) {
-        String sql = "update student set address=? where rollNo=?";
+        String SQL = "update student set address = ? where \"rollNo\" = ?";
         Object args[] = {student.getAddress(), student.getRollNo()};
-        return jdbcTemplate.update(sql,args);
+        return jdbcTemplate.update(SQL, args);
     }
 
     public List<Student> findAllStudents() {
@@ -74,15 +75,15 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     public Student findStudentByRollNo(int rn) {
-        String selectSql = "select * from student where rollNo=?";
+        String selectSql = "select * from student where \"rollNo\"=?";
         Student student = jdbcTemplate.queryForObject(selectSql, new BeanPropertyRowMapper<Student>(Student.class), rn);
         return student;
     }
 
-   // public Student findStudentByName(String name) {
-//        String selectSql = "select * from student where name=?";
-//        jdbcTemplate.query(selectSql,res,name);
-//        return student;
+    // public Student findStudentByName(String name) {
+    // String selectSql = "select * from student where name=?";
+    // jdbcTemplate.query(selectSql,res,name);
+    // return student;
     //}
 
 }

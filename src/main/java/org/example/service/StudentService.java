@@ -1,14 +1,11 @@
-package org.example.dao;
+package org.example.service;
 
 import org.example.Student;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
-public interface StudentDao {
+public interface StudentService {
 
     public void insert(Student student);
 
@@ -25,5 +22,4 @@ public interface StudentDao {
     public void cleanUp();
 
     public Student findStudentByRollNo(int rn);
-
 }
