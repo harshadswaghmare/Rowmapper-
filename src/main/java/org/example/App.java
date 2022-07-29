@@ -1,7 +1,13 @@
 package org.example;
 
+import org.example.dao.daoImpl.StudentDaoImpl;
+import org.example.model.Emp;
+import org.example.model.Pepsi;
+import org.example.model.Samosa;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -10,12 +16,14 @@ public class App {
         System.out.println("application context loaded");
 
         //StudentDaoImpl studentDao = context.getBean("studentDao", StudentDaoImpl.class);
+         Emp  emp = context.getBean(Emp.class);
+         System.out.println(emp.getAddress());
 
         /*********************insert object***************/
-        //        Student student = new Student();
-        //        student.setRollNo(0);
-        //        student.setName("0 record");
-        //        student.setAddress("new address");
+        Student student = new Student();
+        student.setRollNo(11);
+        student.setName("11 record");
+        student.setAddress("11 address");
 
         //studentDao.insert(student);
 
@@ -48,7 +56,7 @@ public class App {
         //        newStudent5.setName("bob4");
         //        newStudent5.setAddress("ameria4");
         //
-        //        List<Student> list = new ArrayList<>();
+        //        List<Student> list = new ArrayList<a>();
         //        list.add(newStudent2);
         //        list.add(newStudent3);
         //        list.add(newStudent4);
@@ -67,6 +75,18 @@ public class App {
 
         /***************find student by roll is *********************/
         //studentDao.findStudentByRollNo(1);
+
+        //xml-byname,bytype,constructor,
+        //annotation autowired
+
+        //automatic
+        //less code
+
+        //no control of programmer
+        //it can't be used for primitive and string values
+
+
+
 
     }
 }
