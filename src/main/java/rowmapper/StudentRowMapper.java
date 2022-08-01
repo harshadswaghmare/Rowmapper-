@@ -1,6 +1,6 @@
 package rowmapper;
 
-import org.example.Student;
+import org.example.model.Student;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

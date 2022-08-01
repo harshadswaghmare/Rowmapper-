@@ -1,14 +1,12 @@
 package org.example.dao.daoImpl;
 
-import org.example.Student;
+import org.example.model.Student;
 import org.example.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import rowmapper.StudentRowMapper;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -18,18 +16,22 @@ import java.util.List;
 //perform different operation
 public class StudentDaoImpl implements StudentDao {
 
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+
 
     @Override
     public void insert(Student student) {
         String sql = "insert into student values(?,?,?)";
         Object[] arg = {student.getRollNo(), student.getName(), student.getAddress()};
         jdbcTemplate.update(sql, arg);
+    }
+
+    @Override
+    public int delete(int roll) {
+        String SQL = "delete from student where \"rollNo\" = ?";
+        return jdbcTemplate.update(SQL, roll);
     }
 
     @Override
@@ -78,6 +80,16 @@ public class StudentDaoImpl implements StudentDao {
         String selectSql = "select * from student where \"rollNo\"=?";
         Student student = jdbcTemplate.queryForObject(selectSql, new BeanPropertyRowMapper<Student>(Student.class), rn);
         return student;
+    }
+
+    public int getStudCount() {
+        String selectSql = "select count(*) from student";
+        return jdbcTemplate.queryForObject(selectSql, Integer.class);
+    }
+
+    @Override
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     // public Student findStudentByName(String name) {

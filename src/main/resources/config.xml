@@ -19,16 +19,20 @@
         <constructor-arg name="password" value="admin"/>
     </bean>
 
-    <bean id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg ref="dataSource"/>
+    <bean
+        id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean
-            class="org.example.model.Address" name="address">
-            <property name="street" value="s1"/>
-            <property name="city" value="city2"/>
+        id="studentDao" class="org.example.dao.daoImpl.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplateObject"/>
     </bean>
 
-    <bean class="org.example.model.Emp"  name="emp1" autowire="byType"/>
+    <bean
+            id="dao" class="org.example.dao.daoImpl.DaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplateObject"/>
+    </bean>
+
 
 </beans>

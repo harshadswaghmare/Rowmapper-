@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.Student;
+import org.example.model.Student;
 
 import javax.sql.DataSource;
 import java.util.List;
@@ -22,4 +22,9 @@ public interface StudentService {
     public void cleanUp();
 
     public Student findStudentByRollNo(int rn);
+
+    public int getAllStudCount();
+
+
+    void deleteStud(int roll);
 }

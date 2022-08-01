@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.Student;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 

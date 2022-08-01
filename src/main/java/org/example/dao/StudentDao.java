@@ -1,16 +1,16 @@
 package org.example.dao;
 
-import org.example.Student;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.example.model.Student;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface StudentDao {
 
     public void insert(Student student);
+
+    public int delete(int roll);
 
     public void insertBatch(List<Student> student);
 
@@ -25,5 +25,9 @@ public interface StudentDao {
     public void cleanUp();
 
     public Student findStudentByRollNo(int rn);
+
+    public  int getStudCount();
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate);
 
 }

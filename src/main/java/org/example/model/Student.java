@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model;
 
 public class Student {
     private int rollNo;
@@ -28,7 +28,7 @@ public class Student {
                 "rollNo=" + rollNo +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                '}';
+                '}'  ;
     }
 
     public String getAddress() {

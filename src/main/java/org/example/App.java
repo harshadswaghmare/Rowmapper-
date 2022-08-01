@@ -1,92 +1,107 @@
 package org.example;
 
-import org.example.dao.daoImpl.StudentDaoImpl;
-import org.example.model.Emp;
-import org.example.model.Pepsi;
-import org.example.model.Samosa;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.example.dao.DaoService;
+import org.example.dao.StudentDao;
+import org.example.dao.daoImpl.DaoImpl;
+import org.example.model.Student;
+import org.example.service.StudentService;
+import org.example.service.TruncateAndInsertService;
+import org.example.service.serviceImpl.StudentServiceImpl;
+import org.example.service.serviceImpl.TruncateAndInsertImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-        System.out.println("application context loaded");
+        StudentDao studentDao = (StudentDao) context.getBean("studentDao");
 
-        //StudentDaoImpl studentDao = context.getBean("studentDao", StudentDaoImpl.class);
-         Emp  emp = context.getBean(Emp.class);
-         System.out.println(emp.getAddress());
+        TruncateAndInsertService truncateAndInsertService = new TruncateAndInsertImpl();
+        truncateAndInsertService.truncateData();
 
-        /*********************insert object***************/
-        Student student = new Student();
-        student.setRollNo(11);
-        student.setName("11 record");
-        student.setAddress("11 address");
+        truncateAndInsertService.insertData("p1.csv");
 
-        //studentDao.insert(student);
+        char ch = 'a';
 
-        /*****************Trunccate table******************/
-        //studentDao.cleanUp();
+        while (ch != 'x') {
 
-        /*****************Print student*******************/
-        //List<Student> studentList = studentDao.findAllStudents();
-        //studentDao.printStudent(studentList);
-
-        /***********Batch insert*******************/
-        //        Student newStudent2 = new Student();
-        //        newStudent2.setRollNo(1);
-        //        newStudent2.setName("bob1");
-        //        newStudent2.setAddress("ameria1");
-        //
-        //
-        //        Student newStudent3 = new Student();
-        //        newStudent3.setRollNo(2);
-        //        newStudent3.setName("bob2");
-        //        newStudent3.setAddress("ameria2");
-        //
-        //        Student newStudent4 = new Student();
-        //        newStudent4.setRollNo(3);
-        //        newStudent4.setName("bob3");
-        //        newStudent4.setAddress("ameria3");
-        //
-        //        Student newStudent5 = new Student();
-        //        newStudent5.setRollNo(4);
-        //        newStudent5.setName("bob4");
-        //        newStudent5.setAddress("ameria4");
-        //
-        //        List<Student> list = new ArrayList<a>();
-        //        list.add(newStudent2);
-        //        list.add(newStudent3);
-        //        list.add(newStudent4);
-        //        list.add(newStudent5);
-        //
-        //        Student update_student = new Student();
-        //        update_student.setRollNo(1);
-        //        update_student.setAddress("updatedAddress");
+            System.out.println("1.CREATE");
+            System.out.println("2.RETRIEVE");
+            System.out.println("3.UPDATE");
+            System.out.println("4.DELETE");
 
 
-        /***************insert batch**************/
-        //studentDao.insertBatch(list);
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please enter your choice");
+            ch = sc.next().charAt(0);
+            System.out.println();
 
-        /***************update student ******************/
-        //studentDao.updateStudent(update_student);
+            switch (ch) {
 
-        /***************find student by roll is *********************/
-        //studentDao.findStudentByRollNo(1);
+                case '1':
+                    //create
+                    System.out.print("Enter roll no := ");
+                    int roll = sc.nextInt();
+                    System.out.println("Enter name := ");
+                    String name = sc.nextLine();
+                    sc.nextLine();
+                    System.out.println("Enter add := ");
+                    String add = sc.nextLine();
+                    System.out.println();
 
-        //xml-byname,bytype,constructor,
-        //annotation autowired
+                    Student student1 = new Student();
+                    student1.setRollNo(roll);
+                    student1.setName(name);
+                    student1.setAddress(add);
 
-        //automatic
-        //less code
+                    studentDao.insert(student1);
+                    break;
 
-        //no control of programmer
-        //it can't be used for primitive and string values
+                case '2':
+                    //retrive
+                    System.out.println("retrieving...");
+                    List<Student> students = studentDao.findAllStudents();
+                    System.out.println(students);
+                    System.out.println();
+                    break;
+
+                case '3':
+                    //update
+
+                    System.out.print("Enter roll no := ");
+                    int r = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Enter add := ");
+                    String a = sc.nextLine();
+
+                    Student student2 = new Student();
+                    student2.setRollNo(r);
+                    student2.setAddress(a);
+                    studentDao.updateStudent(student2);
+                    System.out.println();
+                    break;
 
 
+                case '4':
+                    //delete
+                    System.out.println("Deleting");
+                    System.out.print("Enter roll no := ");
+                    int roll_no_ = sc.nextInt();
+                    studentDao.delete(roll_no_);
+                    System.out.println();
+                    break;
 
+                default:
+                    break;
+
+            }
+
+        }
 
     }
 }
