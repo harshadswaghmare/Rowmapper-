@@ -22,6 +22,15 @@ public class Student {
         this.name = name;
     }
 
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -31,12 +40,5 @@ public class Student {
                 '}'  ;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
 }

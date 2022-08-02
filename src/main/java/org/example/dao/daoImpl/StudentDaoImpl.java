@@ -16,10 +16,16 @@ import java.util.List;
 //perform different operation
 public class StudentDaoImpl implements StudentDao {
 
+
     private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
 
 
+    @Autowired
+    @Override
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public void insert(Student student) {
@@ -87,10 +93,6 @@ public class StudentDaoImpl implements StudentDao {
         return jdbcTemplate.queryForObject(selectSql, Integer.class);
     }
 
-    @Override
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     // public Student findStudentByName(String name) {
     // String selectSql = "select * from student where name=?";

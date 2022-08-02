@@ -24,9 +24,10 @@ import java.util.regex.Pattern;
 public class TruncateAndInsertImpl implements TruncateAndInsertService {
 
 
+    public void truncateData() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
 
-     public void truncateData() {
-        DaoService daoService = new DaoImpl();
+        DaoImpl daoService = (DaoImpl) context.getBean("dao");
         daoService.truncateData();
     }
 
@@ -36,7 +37,7 @@ public class TruncateAndInsertImpl implements TruncateAndInsertService {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
 
-        DaoImpl daoService = context.getBean("dao", DaoImpl.class);
+        DaoImpl daoService = (DaoImpl) context.getBean("dao");
 
         //step 1 : filter the identifier
         List<String> identifier_list = daoService.getIdentifierList(path);

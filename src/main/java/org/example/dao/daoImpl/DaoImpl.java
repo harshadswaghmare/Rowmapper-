@@ -3,10 +3,13 @@ package org.example.dao.daoImpl;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import rowmapper.IdMapper;
 import org.example.dao.DaoService;
 import org.example.model.StorePerson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import rowmapper.JsonMapper;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -14,7 +17,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,7 @@ public class DaoImpl implements DaoService {
 
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
     @Override
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -32,23 +35,7 @@ public class DaoImpl implements DaoService {
 
     @Override
     public void insertData(String id, String json) {
-
-        StringBuffer INSERT_USERS_SQL = new StringBuffer("INSERT INTO task2 (identifier, p_data) VALUES(?,? format json);");
-
-        //Step 1: create connection
-
-        //        A program has to do more than rely on the garbage collector (GC) to reclaim a resource's memory when it's
-        //        finished with it. The program must also release the resoure back to the operating system, typically by calling
-        //        the resource's close method. However, if a program fails to do this before the GC reclaims the resource, then
-        //        the information needed to release the resource is lost.
-        //        The resource, which is still considered by the operaing system to be in use, has leaked.
-        //        In this example, if the readLine method throws an exception,
-        //        and the statement br.close() in the finally block throws an exception,
-        //        then the FileReader has leaked. Therefore, use a try-with-resources statement
-        //        instead of a finally block to close your program's resources.
-
-        Object args[] = {id, json};
-        jdbcTemplate.update(INSERT_USERS_SQL.toString(), args);
+        jdbcTemplate.update("INSERT INTO task2 (identifier, p_data) VALUES(?,?)", new Object[]{id, json}, new int[]{Types.VARCHAR, Types.OTHER});
     }
 
 
@@ -56,7 +43,6 @@ public class DaoImpl implements DaoService {
     public List<StorePerson> getCSV_row(String path) {
 
         Pattern pattern = Pattern.compile(",");
-
         //create list
         List<StorePerson> list = new ArrayList<>();
 
@@ -121,9 +107,18 @@ public class DaoImpl implements DaoService {
     public List getIdListAndJsonList() {
 
         List<List<String>> main_list = new ArrayList<>();
+        List<String> id_list = new ArrayList<>();
+        List<String> json_list = new ArrayList<>();
+        //SQL id
+        StringBuffer SELECT_ID = new StringBuffer("select identifier from task2");
+        id_list = jdbcTemplate.query(SELECT_ID.toString(), new IdMapper());
+        //SQL DATA
+        StringBuffer SELECT_JSON = new StringBuffer("select p_data from task2");
+        json_list = jdbcTemplate.query(SELECT_JSON.toString(), new JsonMapper());
+
+        main_list.add(id_list);
+        main_list.add(json_list);
 
         return main_list;
     }
-
-
 }

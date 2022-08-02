@@ -13,7 +13,6 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-
     StudentDaoImpl studentDao = context.getBean("studentDao", StudentDaoImpl.class);
 
     @Override
