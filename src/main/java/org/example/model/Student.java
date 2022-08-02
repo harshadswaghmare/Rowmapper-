@@ -3,8 +3,17 @@ package org.example.model;
 public class Student {
     private int rollNo;
     private String name;
-    private String address;
 
+    public Student() {
+    }
+
+    public Student(int rollNo, String name, String address) {
+        this.rollNo = rollNo;
+        this.name = name;
+        this.address = address;
+    }
+
+    private String address;
 
     public int getRollNo() {
         return rollNo;
