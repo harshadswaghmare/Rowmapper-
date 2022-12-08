@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface DaoService {
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate);
+
+
+
 
     public void insertData(String id, String json);
 

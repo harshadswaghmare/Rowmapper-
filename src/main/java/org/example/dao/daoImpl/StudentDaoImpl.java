@@ -58,6 +58,7 @@ public class StudentDaoImpl implements StudentDao {
         return jdbcTemplate.update(SQL, args);
     }
 
+
     public List<Student> findAllStudents() {
         String selectQ = "select * from student";
         List<Student> studentList = jdbcTemplate.query(selectQ, new BeanPropertyRowMapper<Student>(Student.class));

@@ -1,5 +1,6 @@
 package org.example.model;
 
+
 public class Student {
     private int rollNo;
     private String name;

@@ -20,12 +20,12 @@
     </bean>
 
     <bean
-        id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
+            id="jdbcTemplateObject" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean
-        id="studentDao" class="org.example.dao.daoImpl.StudentDaoImpl">
+            id="studentDao" class="org.example.dao.daoImpl.StudentDaoImpl">
         <property name="jdbcTemplate" ref="jdbcTemplateObject"/>
     </bean>
 
@@ -34,5 +34,12 @@
         <property name="jdbcTemplate" ref="jdbcTemplateObject"/>
     </bean>
 
+    <bean
+            id="tai" class="org.example.service.serviceImpl.TruncateAndInsertImpl">
+    </bean>
+
+    <bean
+            id="jtc" class="org.example.service.serviceImpl.JsonToCSVImpl">
+    </bean>
 
 </beans>

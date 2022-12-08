@@ -22,7 +22,7 @@ import java.util.List;
 public class JsonToCSVImpl implements JsonToCSVService {
 
     /***********************************function for JSON TO CSV ***************************/
-    public List<RetrievePerson> json_to_CSV(String path) throws IOException {
+    public List<RetrievePerson> json_to_CSV() throws IOException {
 
         List<String> id_list;
         List<String> json_list;

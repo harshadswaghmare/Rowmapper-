@@ -20,5 +20,5 @@ import java.util.List;
 public interface JsonToCSVService {
 
     /***********************************function for JSON TO CSV ***************************/
-    public List<RetrievePerson> json_to_CSV(String path) throws IOException;
+    public List<RetrievePerson> json_to_CSV() throws IOException;
 }
